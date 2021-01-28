@@ -47,7 +47,7 @@ router.post(
         res
           .header("Access-Control-Expose-Headers", "x-auth-token")
           .header("x-auth-token", generateAuthToken({ id: insertId, username }))
-          .json({ message: "registration was successfull" });
+          .json({ email, username, id, account_sum: 100 });
       }
     } catch (error) {
       return res.status(500).send("Internal server error, sorry.");
