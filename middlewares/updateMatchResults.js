@@ -33,6 +33,9 @@ module.exports = updateMatchResults = async () => {
       console.log(error);
     }
   });
+  python.on("error", (err) => {
+    console.log("\n\t\tERROR: spawn failed! (" + err + ")");
+  });
   python.on("close", () => {
     console.log("end of all");
     return matchResults;
