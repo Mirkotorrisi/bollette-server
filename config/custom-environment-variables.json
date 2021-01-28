@@ -2,5 +2,6 @@
   "jwtPrivateKey": "bollette_jwtPrivateKey",
   "the_odds_api_key": "bollette_apikey",
   "db_username": "bollette_db_username",
-  "db_password": "bollette_db_password"
+  "db_password": "bollette_db_password",
+  "redis_url": "bollette_redis_url"
 }

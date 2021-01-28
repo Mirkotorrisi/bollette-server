@@ -12,16 +12,18 @@ const yourbet = require("./routes/yourbet");
 const updateMatchResults = require("./middlewares/updateMatchResults");
 
 require("./prod")(app);
-if (
-  !config.get("jwtPrivateKey") ||
-  !config.get("the_odds_api_key") ||
-  !config.get("db_password") ||
-  !config.get("redis_url") ||
-  !config.get("db_username")
-) {
-  console.error("FATAL ERROR: PRIVATE KEY NOT DEFINED!");
-  process.exit(1);
-}
+[
+  "jwtPrivateKey",
+  "the_odds_api_key",
+  "db_password",
+  "redis_url",
+  "db_username",
+].forEach((i) => {
+  if (!config.get(i)) {
+    console.error(`FATAL ERROR: ${i} NOT DEFINED!`);
+    process.exit(1);
+  }
+});
 
 cron.schedule("*/10 * * * *", () => {
   updateMatchResults();
@@ -34,6 +36,6 @@ app.use("/championships", championships);
 app.use("/bets", bets);
 app.use("/yourbet", yourbet);
 
-module.exports = app.listen(process.env.PORT || 5000, () => {
+module.exports = app.listen(process.env.PORT || 3001, () => {
   console.log(`Example app listening at http://localhost:3001`);
 });
