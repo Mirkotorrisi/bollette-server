@@ -31,7 +31,6 @@ router.post(
     .isLength(6)
     .withMessage("Username must be at least 6 characters long"),
   body("password")
-    .isAlphanumeric()
     .isLength(8)
     .withMessage("Password must be at least 8 characters long"),
   handleErrors,
@@ -44,10 +43,17 @@ router.post(
         const salt = await bcrypt.genSalt(10);
         const hashed = await bcrypt.hash(password, salt);
         const { insertId } = await insertUser(username, email, hashed);
-        res
-          .header("Access-Control-Expose-Headers", "x-auth-token")
-          .header("x-auth-token", generateAuthToken({ id: insertId, username }))
-          .json({ email, username, id: insertId, account_sum: 100 });
+        const token = generateAuthToken({ id: insertId, username });
+        client.set(user.id, token, "EX", 60 * 5, (err, result) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).send("Internal server error, sorry.");
+          }
+          res
+            .header("Access-Control-Expose-Headers", "x-auth-token")
+            .header("x-auth-token", token)
+            .json({ email, username, id: insertId, account_sum: 100 });
+        });
       }
     } catch (error) {
       console.log(error);
