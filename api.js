@@ -16,6 +16,7 @@ if (
   !config.get("jwtPrivateKey") ||
   !config.get("the_odds_api_key") ||
   !config.get("db_password") ||
+  !config.get("redis_url") ||
   !config.get("db_username")
 ) {
   console.error("FATAL ERROR: PRIVATE KEY NOT DEFINED!");

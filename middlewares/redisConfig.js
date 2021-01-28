@@ -1,5 +1,8 @@
 const redis = require("redis");
-const client = redis.createClient();
+const config = require("config");
+const client = redis.createClient({
+  url: config.get("redis_url"),
+});
 
 client.on("error", function (error) {
   console.error(error);
