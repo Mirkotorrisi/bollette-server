@@ -47,9 +47,10 @@ router.post(
         res
           .header("Access-Control-Expose-Headers", "x-auth-token")
           .header("x-auth-token", generateAuthToken({ id: insertId, username }))
-          .json({ email, username, id, account_sum: 100 });
+          .json({ email, username, id: insertId, account_sum: 100 });
       }
     } catch (error) {
+      console.log(error);
       return res.status(500).send("Internal server error, sorry.");
     }
   }
