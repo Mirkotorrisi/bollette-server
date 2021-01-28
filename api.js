@@ -33,6 +33,6 @@ app.use("/championships", championships);
 app.use("/bets", bets);
 app.use("/yourbet", yourbet);
 
-module.exports = app.listen(3001, () => {
+module.exports = app.listen(process.env.PORT || 5000, () => {
   console.log(`Example app listening at http://localhost:3001`);
 });
