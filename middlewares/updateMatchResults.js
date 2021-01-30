@@ -26,11 +26,8 @@ module.exports = updateMatchResults = async () => {
             // temp_item[2] === "2"
             temp_item.length === 3
           ) {
-            console.log("qua ci siamo");
-            console.log(
-              await updateBetStatus(temp_item[2], team_1, team_2).catch((err) =>
-                console.log(err)
-              )
+            await updateBetStatus(temp_item[2], team_1, team_2).catch((err) =>
+              console.log(err)
             );
           }
           return team_1 + "-" + team_2 + " " + temp_item[2];
