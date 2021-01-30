@@ -1,7 +1,7 @@
 const db = require("./db");
 
 const updateBetStatus = (result, team_1, team_2) => {
-  console.log("QUESTO E' IL RESULT", result, team_1, team_2);
+  console.log("QUESTO E' IL RESULT", team_1, result, team_2);
   return db
     .query(
       `UPDATE bet SET  status = (CASE WHEN result = '${result}' THEN 'won' ELSE 'lost' END) WHERE (status = 'lost' AND team_1 LIKE '%${team_1}%'AND team_2 LIKE '%${team_2}%');`
