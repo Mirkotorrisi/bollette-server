@@ -19,7 +19,6 @@ module.exports = updateMatchResults = async () => {
         .split("\r\n")
         .map(async (item) => {
           const temp_item = item.split("-");
-          console.log(temp_item[2].length, temp_item[2]);
           let [team_1, team_2] = fixTeams([temp_item[0], temp_item[1]]);
           if (
             temp_item[2] === "1" ||
