@@ -31,7 +31,7 @@ module.exports = updateMatchResults = async () => {
     console.log("\n\t\tERROR: spawn failed! (" + err + ")");
   });
   python.on("close", async () => {
-    await updateUserSum();
+    console.log("update User Sum", await updateUserSum());
     console.log("update Bolletta status", await updateBollettaStatus());
     console.log("update Bolletta paid", await updateBollettaPaid());
     console.log("end of all");
