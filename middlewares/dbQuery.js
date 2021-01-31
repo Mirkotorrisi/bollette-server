@@ -25,7 +25,6 @@ const updateUserSum = async () => {
       throw new Error(err);
     });
   won_ticket_id.forEach(({ user_id }) => {
-    console.log(user_id);
     db.query(
       `UPDATE users set account_sum = account_sum + (SELECT SUM(max_win) FROM bolletta WHERE (status = 'won' AND paid = FALSE AND user_id = users.id)) WHERE id = ${user_id}`
     ).catch((err) => {
