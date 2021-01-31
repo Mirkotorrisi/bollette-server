@@ -8,7 +8,7 @@ const cron = require("node-cron");
 const users = require("./routes/users");
 const championships = require("./routes/championships");
 const bets = require("./routes/bets");
-const yourbet = require("./routes/yourbet");
+const ranking = require("./routes/ranking");
 const updateMatchResults = require("./middlewares/updateMatchResults");
 
 require("./prod")(app);
@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use("/users", users);
 app.use("/championships", championships);
 app.use("/bets", bets);
-app.use("/yourbet", yourbet);
+app.use("/ranking", ranking);
 
 module.exports = app.listen(process.env.PORT || 3001, () => {
   console.log(`Example app listening at http://localhost:3001`);

@@ -1,5 +1,18 @@
 const db = require("./db");
-
+const getRanking = () =>
+  db
+    .query("SELECT username, account_sum FROM users ORDER BY account_sum DESC")
+    .catch((err) => {
+      throw new Error(err);
+    });
+const getBestMultiplier = () =>
+  db
+    .query(
+      "SELECT bolletta.max_win, u.username FROM bolletta INNER JOIN (SELECT id, username FROM users) u ON u.id = bolletta.user_id WHERE status='won' ORDER BY max_win DESC"
+    )
+    .catch((err) => {
+      throw new Error(err);
+    });
 const updateBetStatus = (result, team_1, team_2) => {
   return db
     .query(
@@ -98,6 +111,8 @@ const getTicketsByUser = (id) =>
     });
 
 module.exports = {
+  getRanking,
+  getBestMultiplier,
   updateBetStatus,
   updateBollettaStatus,
   updateUserSum,
