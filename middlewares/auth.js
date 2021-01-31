@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     client.get(verified.id, (err, result) => {
       if (err) return res.status(500).send("Internal server error, sorry.");
       if (result && token === result) {
-        client.set(verified.id, token, "EX", 60 * 5, (err, res) => {
+        client.set(verified.id, token, "EX", 60 * 10, (err, res) => {
           req.user = verified;
           next();
         });

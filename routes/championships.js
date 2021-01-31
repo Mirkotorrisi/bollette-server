@@ -17,19 +17,22 @@ const sport_keys = {
   champions_league: "soccer_uefa_champs_league",
   europa_league: "soccer_uefa_europa_league",
 };
+const mkts = ["h2h", "totals"];
 let availableBetList;
 
 router.get(
-  "/:championship",
+  "/:championship/:mkt",
   param("championship")
     .isIn(Object.keys(sport_keys))
     .withMessage("We don't have this championship sorry"),
+  param("mkt").isIn(mkts).withMessage("We don't have this championship sorry"),
   handleErrors,
-  async ({ params: { championship } }, res) => {
+  async ({ params: { championship, mkt } }, res) => {
     try {
-      availableBetList = await fetchOdds(sport_keys[championship]);
+      availableBetList = await fetchOdds(sport_keys[championship], mkt);
       res.json(availableBetList);
     } catch (err) {
+      console.log(err);
       res.status(500).send("Internal server error... sorry");
     }
   }

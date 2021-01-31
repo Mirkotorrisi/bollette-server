@@ -44,7 +44,7 @@ router.post(
         const hashed = await bcrypt.hash(password, salt);
         const { insertId } = await insertUser(username, email, hashed);
         const token = generateAuthToken({ id: insertId, username });
-        client.set(insertId, token, "EX", 60 * 5, (err, result) => {
+        client.set(insertId, token, "EX", 60 * 10, (err, result) => {
           if (err) {
             console.log(err);
             return res.status(500).send("Internal server error, sorry.");
@@ -80,7 +80,7 @@ router.post(
         if (validatePass) {
           const { password, ...user } = userFetch[0];
           const token = generateAuthToken(user);
-          client.set(user.id, token, "EX", 60 * 5, (err, result) => {
+          client.set(user.id, token, "EX", 60 * 10, (err, result) => {
             if (err) {
               console.log(err);
               return res.status(500).send("Internal server error, sorry.");
