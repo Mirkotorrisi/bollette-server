@@ -32,27 +32,34 @@ const updateBollettaStatus = () =>
       throw new Error(err);
     });
 const updateUserSum = async () => {
+  console.log("dio salame");
+
   const won_ticket_id = await db
-    .query(`SELECT user_id FROM bolletta WHERE (status = 'won' AND paid=FALSE)`)
-    .catch((err) => {
-      throw new Error(err);
-    });
-  won_ticket_id.forEach(({ user_id }) => {
-    db.query(
-      `UPDATE users set account_sum = account_sum + (SELECT SUM(max_win) FROM bolletta WHERE (status = 'won' AND paid = FALSE AND user_id = users.id)) WHERE id = ${user_id}`
-    ).catch((err) => {
-      throw new Error(err);
-    });
-  });
-};
-const updateBollettaPaid = () =>
-  db
     .query(
-      `UPDATE bolletta set paid = TRUE WHERE (status = 'won' AND paid = FALSE)`
+      `SELECT ticket_id,max_win,user_id FROM bolletta WHERE (status = 'won' AND paid=FALSE)`
     )
     .catch((err) => {
       throw new Error(err);
     });
+  won_ticket_id.forEach(async ({ ticket_id, max_win, user_id }) => {
+    console.log("dio sorcio");
+    const first = await db
+      .query(
+        `UPDATE users set account_sum = account_sum + ${max_win} WHERE id = ${user_id};`
+      )
+      .catch((err) => {
+        throw new Error(err);
+      });
+    console.log(first);
+    const second = await db
+      .query(`UPDATE bolletta set paid = TRUE WHERE ticket_id = ${ticket_id};`)
+      .catch((err) => {
+        throw new Error(err);
+      });
+    console.log(second);
+  });
+};
+
 const insertBolletta = (ticket_id, betImport, maxWin, id) =>
   db
     .query(
@@ -116,7 +123,6 @@ module.exports = {
   updateBetStatus,
   updateBollettaStatus,
   updateUserSum,
-  updateBollettaPaid,
   insertBolletta,
   decrementUserSum,
   getUserSum,

@@ -5,7 +5,6 @@ const {
   updateBetStatus,
   updateBollettaStatus,
   updateUserSum,
-  updateBollettaPaid,
 } = require("../middlewares/dbQuery");
 
 module.exports = updateMatchResults = async () => {
@@ -34,9 +33,8 @@ module.exports = updateMatchResults = async () => {
     console.log("\n\t\tERROR: spawn failed! (" + err + ")");
   });
   python.on("close", async () => {
-    console.log("update User Sum", await updateUserSum());
     console.log("update Bolletta status", await updateBollettaStatus());
-    console.log("update Bolletta paid", await updateBollettaPaid());
+    await updateUserSum();
     console.log("end of all");
     return matchResults;
   });
