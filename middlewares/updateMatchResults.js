@@ -1,6 +1,5 @@
 const { fixTeams } = require("../middlewares/utilities");
 const { spawn } = require("child_process");
-const db = require("../middlewares/db");
 const {
   updateBetStatus,
   updateBollettaStatus,
@@ -18,13 +17,15 @@ module.exports = updateMatchResults = async () => {
       .map(async (item) => {
         const temp_item = item.split("-");
         let [team_1, team_2] = fixTeams([temp_item[0], temp_item[1]]);
-        if (temp_item.length === 3 && temp_item[2] !== undefined) {
-          await updateBetStatus(
-            temp_item[2][0],
-            temp_item[3].trim(),
-            team_1,
-            team_2
-          ).catch((err) => console.log(err));
+        if (temp_item[2] !== undefined) {
+          console.log(
+            await updateBetStatus(
+              temp_item[2][0],
+              temp_item[3].trim(),
+              team_1,
+              team_2
+            ).catch((err) => console.log(err))
+          );
         }
       });
   });
