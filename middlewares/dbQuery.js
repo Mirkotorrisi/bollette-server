@@ -13,10 +13,10 @@ const getBestMultiplier = () =>
     .catch((err) => {
       throw new Error(err);
     });
-const updateBetStatus = (result, team_1, team_2) => {
+const updateBetStatus = (result, total, team_1, team_2) => {
   return db
     .query(
-      `UPDATE bet SET  status = (CASE WHEN result = '${result}' THEN 'won' ELSE 'lost' END) WHERE (status = 'ongoing' AND team_1 LIKE '%${team_1}%'AND team_2 LIKE '%${team_2}%');`
+      `UPDATE bet SET  status = (CASE WHEN (result = '${result}' OR result = '${total}') THEN 'won' ELSE 'lost' END) WHERE (status = 'ongoing' AND team_1 LIKE '%${team_1}%'AND team_2 LIKE '%${team_2}%');`
     )
     .catch((err) => {
       throw new Error(err);

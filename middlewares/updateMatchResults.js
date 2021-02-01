@@ -10,7 +10,7 @@ const {
 
 module.exports = updateMatchResults = async () => {
   let matchResults;
-  const python = spawn("python", ["scraper.py"]);
+  const python = spawn("py", ["scraper.py"]);
   python.stdout.on("data", async (data) => {
     console.log("got data from scraping");
     matchResults = data
@@ -20,9 +20,12 @@ module.exports = updateMatchResults = async () => {
         const temp_item = item.split("-");
         let [team_1, team_2] = fixTeams([temp_item[0], temp_item[1]]);
         if (temp_item.length === 3 && temp_item[2] !== undefined) {
-          await updateBetStatus(temp_item[2][0], team_1, team_2).catch((err) =>
-            console.log(err)
-          );
+          await updateBetStatus(
+            temp_item[2][0],
+            temp_item[3].trim(),
+            team_1,
+            team_2
+          ).catch((err) => console.log(err));
         }
       });
   });
