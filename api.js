@@ -24,8 +24,9 @@ require("./prod")(app);
     process.exit(1);
   }
 });
+updateMatchResults();
 
-cron.schedule("*/1 * * * *", () => {
+cron.schedule("*/5 * * * *", () => {
   updateMatchResults();
 });
 

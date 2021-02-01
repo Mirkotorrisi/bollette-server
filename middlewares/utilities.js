@@ -13,6 +13,7 @@ const fixTeams = (teams) => {
       "and",
       "&",
       "AS",
+      "SAD",
       /[0-9]/g,
     ].map((toDel) => (team = team?.replace(toDel, "")));
     return team?.trim();
