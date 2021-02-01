@@ -9,7 +9,7 @@ const {
 
 module.exports = updateMatchResults = async () => {
   let matchResults;
-  const python = spawn("py", ["scraper.py"]);
+  const python = spawn("python", ["scraper.py"]);
   python.stdout.on("data", async (data) => {
     console.log("got data from scraping");
     matchResults = data

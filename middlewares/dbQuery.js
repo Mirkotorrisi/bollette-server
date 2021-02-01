@@ -32,8 +32,6 @@ const updateBollettaStatus = () =>
       throw new Error(err);
     });
 const updateUserSum = async () => {
-  console.log("dio salame");
-
   const won_ticket_id = await db
     .query(
       `SELECT ticket_id,max_win,user_id FROM bolletta WHERE (status = 'won' AND paid=FALSE)`
@@ -42,7 +40,6 @@ const updateUserSum = async () => {
       throw new Error(err);
     });
   won_ticket_id.forEach(async ({ ticket_id, max_win, user_id }) => {
-    console.log("dio sorcio");
     const first = await db
       .query(
         `UPDATE users set account_sum = account_sum + ${max_win} WHERE id = ${user_id};`
@@ -50,13 +47,13 @@ const updateUserSum = async () => {
       .catch((err) => {
         throw new Error(err);
       });
-    console.log(first);
+    console.log("update user sum, changed rows", first.changedRows);
     const second = await db
       .query(`UPDATE bolletta set paid = TRUE WHERE ticket_id = ${ticket_id};`)
       .catch((err) => {
         throw new Error(err);
       });
-    console.log(second);
+    console.log("update bolletta paid, changed rows", second.changedRows);
   });
 };
 

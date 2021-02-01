@@ -25,7 +25,7 @@ require("./prod")(app);
   }
 });
 
-cron.schedule("*/50 * * * *", () => {
+cron.schedule("*/5 * * * *", () => {
   updateMatchResults();
 });
 
