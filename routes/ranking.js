@@ -1,14 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { param } = require("express-validator");
-const handleErrors = require("../middlewares/handleErrors");
 const { getRanking, getBestMultiplier } = require("../middlewares/dbQuery");
 
 router.get("/", async (_, res) => {
   const ranking = await getRanking();
   res.json(ranking);
 });
-router.get("/multiplier", async (_, res) => {
+router.get("/maxwins", async (_, res) => {
   const ranking = await getBestMultiplier();
   res.json(ranking);
 });
