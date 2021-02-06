@@ -8,7 +8,7 @@ To provide odds I rely on a 3rd party service: [the odds api](https://the-odds-a
 
 To place bets, api must call championship route first, in order to load fresh odds related to the desired market and championship
 
-##ROUTES 
+## ROUTES 
 - **GET /championships/:championship/:market/** route takes two parameters: championship and market, because it provides 2 different types of odds (h2h - who wins the game, totals - number of goals).
 
 After desired odds are cached, user can place some bets on them throught the /bets route.
@@ -27,19 +27,19 @@ If user bets on a game he already betted in, the past bet will be overwritten, b
 - **GET /users/account_sum** if authenticated, returns user account sum.
 - **GET /users/ticket** if authenticated, returns user's tickets.
 
-##MIDDLEWARES
+## MIDDLEWARES
 
--**auth** check if token is stored on redis db. If not, returns 401. If it is stored, renews it for 10 minutes and returns respective user.
--**db** MYSQL db setup. Creates a pool and promisify all queries.
--**dbQuery** ALL mysql queries used throughout the app. 
--**fetchOdds** middleware wich calls the external API to fetch all odds, it takes championship and market as parameter. It fixes 3rd API's output to accomplish app's purposes.
--**handleErrors** generic error handler middleware, used to handle express-validator
--**redisConfig** REDIS setup
--**updateMatchResult** middleware wich spawns python scraper, in order to retrieve all ended matches of the current day and the past one. It manipulates its output and calls some db queries to update all stored bets, tickets and user accounts (in case of win)
--**utilities** _fixTeams_ is a function wich removes some letters from teams' names in order to make them equal in both retrieved matches from scraping and odds fetched from 3rd party api.
+- **auth** check if token is stored on redis db. If not, returns 401. If it is stored, renews it for 10 minutes and returns respective user.
+- **db** MYSQL db setup. Creates a pool and promisify all queries.
+- **dbQuery** ALL mysql queries used throughout the app. 
+- **fetchOdds** middleware wich calls the external API to fetch all odds, it takes championship and market as parameter. It fixes 3rd API's output to accomplish app's purposes.
+- **handleErrors** generic error handler middleware, used to handle express-validator
+- **redisConfig** REDIS setup
+- **updateMatchResult** middleware wich spawns python scraper, in order to retrieve all ended matches of the current day and the past one. It manipulates its output and calls some db queries to update all stored bets, tickets and user accounts (in case of win)
+- **utilities** _fixTeams_ is a function wich removes some letters from teams' names in order to make them equal in both retrieved matches from scraping and odds fetched from 3rd party api.
 
-##EXTERNAL SCRIPT
+## EXTERNAL SCRIPT
 
--**scraper.py** this simple scraper uses BeautifulSoup and scrapes a page www.livescores.cz, fetching all soccer results from the current and past day.
+- **scraper.py** this simple scraper uses BeautifulSoup and scrapes a page www.livescores.cz, fetching all soccer results from the current and past day.
 
 
