@@ -22,19 +22,19 @@ module.exports = fetchOdds = async (sport, mkt) => {
         odds =
           ordered_teams[0] === teams[0]
             ? {
-                1: sites[0].odds.h2h[0],
-                X: sites[0].odds.h2h[2],
-                2: sites[0].odds.h2h[1],
+                1: sites[0]?.odds.h2h[0],
+                X: sites[0]?.odds.h2h[2],
+                2: sites[0]?.odds.h2h[1],
               }
             : {
-                1: sites[0].odds.h2h[1],
-                X: sites[0].odds.h2h[2],
-                2: sites[0].odds.h2h[0],
+                1: sites[0]?.odds.h2h[1],
+                X: sites[0]?.odds.h2h[2],
+                2: sites[0]?.odds.h2h[0],
               };
       else if (mkt === "totals")
         odds = {
-          over: sites[0].odds.totals.odds[0],
-          under: sites[0].odds.totals.odds[1],
+          over: sites[0]?.odds.totals.odds[0],
+          under: sites[0]?.odds.totals.odds[1],
         };
       return {
         teams: ordered_teams,
