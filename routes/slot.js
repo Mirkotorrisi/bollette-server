@@ -34,7 +34,7 @@ async ({ body: { numOfWheels,numOfSymbols, betImport }, user: { id } }, res) => 
       res.json({
         results,
         duplicates,
-        sum?
+        sum
       });
   } catch (err) {
     console.log(err)
