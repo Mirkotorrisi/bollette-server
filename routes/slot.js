@@ -23,7 +23,7 @@ body("numOfSymbols")
 async ({ body: { numOfWheels,numOfSymbols, betImport }, user: { id } }, res) => {
   try {
     await decrementUserSum(betImport, id);
-    const results = Array.from({length: numOfWheels}, () => Math.floor(Math.random() * 100));
+    const results = Array.from({length: numOfWheels}, () => Math.floor(Math.random() * numOfSymbols));
     const values = results.map((i) => i % numOfSymbols)
     let sum;
     let duplicates = values.filter((item, index) => values.indexOf(item) != index)
