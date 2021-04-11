@@ -73,6 +73,14 @@ const decrementUserSum = (betImport, id) =>
     .catch((err) => {
       throw new Error(err);
     });
+const incrementUserSum = (winImport, id) =>
+  db
+    .query(
+      `UPDATE users SET account_sum = account_sum - ${winImport} WHERE (id = ${id})`
+    )
+    .catch((err) => {
+      throw new Error(err);
+    });
 
 const getUserSum = (id) =>
   db.query(`SELECT account_sum from users WHERE (id = ${id})`).catch((err) => {
@@ -122,6 +130,7 @@ module.exports = {
   updateUserSum,
   insertBolletta,
   decrementUserSum,
+  incrementUserSum,
   getUserSum,
   insertBet,
   getUser,
