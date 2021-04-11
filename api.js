@@ -8,6 +8,7 @@ const cron = require("node-cron");
 const users = require("./routes/users");
 const championships = require("./routes/championships");
 const bets = require("./routes/bets");
+const slot = require("./routes/slot");
 const ranking = require("./routes/ranking");
 const updateMatchResults = require("./middlewares/updateMatchResults");
 
@@ -35,6 +36,7 @@ app.use(bodyParser.json());
 app.use("/users", users);
 app.use("/championships", championships);
 app.use("/bets", bets);
+app.use("/slot", slot);
 app.use("/ranking", ranking);
 
 module.exports = app.listen(process.env.PORT || 3001, () => {
