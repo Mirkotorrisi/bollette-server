@@ -116,7 +116,7 @@ const insertUser = (username, email, hashed) =>
 const getTicketsByUser = (id) =>
   db
     .query(
-      `SELECT team_1,team_2,result,odd,bet.ticket_id,commence_time,bet.status AS bet_status, bolletta.status AS bolletta_status,import AS bet_import,max_win FROM (bet INNER JOIN bolletta) WHERE bet.ticket_id = bolletta.ticket_id AND bolletta.user_id =${id};`
+      `SELECT team_1,team_2,result,odd,bet.ticket_id,commence_time,bet.status AS bet_status, bolletta.status AS bolletta_status,import AS bet_import,max_win FROM (bet INNER JOIN bolletta) WHERE bet.ticket_id = bolletta.ticket_id AND bolletta.user_id =${id} ORDER BY insert_time DESC;`
     )
     .catch((err) => {
       throw new Error(err);

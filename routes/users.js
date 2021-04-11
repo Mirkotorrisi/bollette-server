@@ -138,6 +138,7 @@ router.get("/tickets", auth, async ({ user: { id } }, res) => {
     );
     res.json(finalResult.filter((i) => i !== null));
   } catch (error) {
+    console.log(error);
     return res.status(500).send("Internal server error, sorry.");
   }
 });
