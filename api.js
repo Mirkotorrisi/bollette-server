@@ -17,7 +17,9 @@ require("./prod")(app);
   "jwtPrivateKey",
   "the_odds_api_key",
   "db_password",
-  "redis_url",
+  "redis_host",
+  "redis_name",
+  "redis_password",
   "db_username",
 ].forEach((i) => {
   if (!config.get(i)) {
