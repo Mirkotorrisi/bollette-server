@@ -1,7 +1,7 @@
 const redis = require("redis");
 const config = require("config");
 const client = redis.createClient({
-  name: config.get("redis_name"),
+  port: config.get("redis_port"),
   host: config.get("redis_host"),
   password: config.get("redis_password"),
   retry_strategy: function (options) {

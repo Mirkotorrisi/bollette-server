@@ -4,6 +4,6 @@
   "db_password": "",
   "db_username": "",
   "redis_host": "",
-  "redis_name": "",
+  "redis_port": "",
   "redis_password": ""
 }

@@ -18,7 +18,7 @@ require("./prod")(app);
   "the_odds_api_key",
   "db_password",
   "redis_host",
-  "redis_name",
+  "redis_port",
   "redis_password",
   "db_username",
 ].forEach((i) => {

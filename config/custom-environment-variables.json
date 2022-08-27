@@ -5,5 +5,5 @@
   "db_password": "bollette_db_password",
   "redis_password": "bollette_redis_password",
   "redis_host": "bollette_redis_host",
-  "redis_name": "bollette_redis_name"
+  "redis_port": "bollette_redis_port"
 }
